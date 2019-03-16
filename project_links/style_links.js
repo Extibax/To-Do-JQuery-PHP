@@ -5,5 +5,5 @@ document.write
     /* Montserrat font */
     "<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>",
     /* Styles */
-    "<link rel='stylesheet' href='style.css'>"
+    "<link rel='stylesheet' href='styles/style.css'>"
 );
