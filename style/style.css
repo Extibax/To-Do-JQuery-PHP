@@ -1,3 +1,31 @@
 .bg-dark-flux {
     background: #1A1A1A;
 }
+
+.header-logo {
+    width: 7%;
+}
+
+.main-section {
+    background: url('../img/4k-wallpaper-calm-waters-dark-1252869.jpg') #F5F5F5;
+    background-size: cover;
+    position: relative;
+    min-height: 90vmin;
+}
+
+.sidebar {
+    min-height: 90vmin;
+}
+
+.sidebar-logo {
+    width: 50%;
+}
+
+.background-overlay {
+    background: rgba(95, 39, 205, .1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}

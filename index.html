@@ -5,40 +5,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Link Favicon -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <!-- Import styles -->
+    <!-- Link Bootstrap -->
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T'
         crossorigin='anonymous'>
-    <link rel="stylesheet" href="styles/style.css">
+    <!-- <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T'
+        crossorigin='anonymous'> -->
+    <!-- Link Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+    <!-- Link Styles CSS -->
+    <link rel="stylesheet" href="style/style.css">
 
     <title>To-Do-Extibax.inc</title>
 </head>
 
-<body class="bg-dark">
-    <header class="navbar navbar-expand navbar-dark bg-dark-flux m-0">
-        <div class="navbar-brand">
-            <img src="img/Logotype.png" alt="extibax.inc logo" width="50">
-            <a class="text-white" href="index.html">To Do</a>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between">
+        <div class="container">
+            <div class="navbar-brand">
+                <img class="img-fluid header-logo" src="img/Logotype.png" alt="extibax.inc logo">
+                <a class="text-white" href="index.html">
+                    To Do
+                </a>
+            </div>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="#" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active">To Do</a></li>
+                <li class="nav-item"><a href="#" class="nav-link ">Portfolio</a></li>
+                <li class="nav-item"><a href="#" class="nav-link ">Be Programmer</a></li>
+            </ul>
         </div>
-        <ul class="navbar-nav">
-            <li class="nav-item"><a href="#" class="btn btn-outline-dark nav-link">Home</a></li>
-            <li class="nav-item"><a href="#" class="btn btn-outline-dark active nav-link">To Do</a></li>
-            <li class="nav-item"><a href="#" class="btn btn-outline-dark nav-link">Portfolio</a></li>
-            <li class="nav-item"><a href="#" class="btn btn-outline-dark nav-link">Be Programmer</a></li>
-        </ul>
     </header>
-    <main>
-        <div class="row">
-            <div class="col-3 bg-light">
-                <div class="card">
-                    Pic here
+
+    <section class="main-section">
+        <div class="//background-overlay">
+            <div class="container text-white">
+                <div class="row">
+                    <div class="col-md-3 sidebar d-flex flex-column pt-5">
+                        <div class="text-center">
+                            <img class="img-fluid sidebar-logo" src="img/Logotype.png" alt="Extbax Logotype">
+                            <h3 class="text-center">Extibax Developer</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-9 pt-5">
+                        <div class="row">
+                            <form class="form-inline form-group w-100">
+                                <input type="text" class="form-control bg-dark border-dark w-100 text-center text-white" placeholder="Enter your task">
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="list-group w-100">
+                                <div class="list-group-item bg-dark">Hello</div>
+                                <div class="list-group-item bg-dark">Hello</div>
+                                <div class="list-group-item bg-dark">Hello</div>
+                                <div class="list-group-item bg-dark">Hello</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-8">
-
-            </div>
         </div>
-    </main>
+    </section>
 
     <!-- #region -->
     <!-- Import scripts -->
