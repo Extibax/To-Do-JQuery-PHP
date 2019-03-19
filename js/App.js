@@ -10,25 +10,7 @@ $(document).ready(() => {
             fetchTodos();
         }
     });
-
-    $(document).mousedown(function (e) {
-        let seleccionado = "#"+this.ID;
-        console.log(seleccionado);
-
-        if (e.button == 2) {
-            $("#menuCapa").css("top", e.pageY - 20);
-            $("#menuCapa").css("left", e.pageX - 20);
-            $("#menuCapa").show('fast');
-        }
-    });
-
-    $(document).bind("contextmenu", function (e) {
-        return false;
-    });
-
-    $('#menuCapa').mouseleave(function () { 
-        $('#menuCapa').hide('fast');
-    });
+    
 });
 
 function saveTodo() {
