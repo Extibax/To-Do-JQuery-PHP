@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS todos(
     Category_id     INT(11) NOT NULL,
     Todo            TEXT NOT NULL,
     Date            TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Due_date        TIMESTAMP,
+    Due_date        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_todos PRIMARY KEY(ID),
     CONSTRAINT fk_users FOREIGN KEY(User_id) REFERENCES users(ID),
     CONSTRAINT fk_categories FOREIGN KEY(Category_id) REFERENCES categories(ID)
