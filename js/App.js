@@ -12,9 +12,13 @@ $(document).ready(() => {
     });
 
     $('#form-edit-todo').keypress(function (e) {
+        e.preventDefault();
         var code = (e.keyCode ? e.KeyCode : e.which);
+        console.log(code);
         if (code == 13) {
-            e.preventDefault();
+            $('#form-edit-todo').trigger('reset');
+            
+
             let element = $(this)[0];
             console.log(element);
         }
