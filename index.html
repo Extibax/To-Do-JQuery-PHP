@@ -51,21 +51,40 @@
                     </div>
                     <div class="col-md-9 pt-5">
                         <div class="row">
-                            <form class="form-inline form-group w-100" id="form-todo">
+                            <form class="form-inline form-group w-100" id="form-save-todo">
                                 <div class="input-group-lg w-100">
                                     <input class="form-control bg-dark border-dark w-100 text-white" id="input-todo"
-                                        type="text" placeholder="Enter your task">
+                                        type="text" placeholder="Enter your To Do:">
                                 </div>
                             </form>
                         </div>
                         <div class="row">
                             <div class="list-group w-100" id="todos">
-                                <div class="list-group-item bg-dark mb-1 d-flex justify-content-between align-items-center">Terminar
-                                    mi portafolio web <span class="badge badge-primary badge-pill">18</span></div>
-                                <div class="list-group-item bg-dark mb-1">Completar la programacion del Back-End del To
-                                    Do App</div>
-                                <div class="list-group-item bg-dark mb-1">Mejorar el Customer Manager de la Sra Esther</div>
-                                <div class="list-group-item bg-dark mb-1">Continuar con el proyecto Be Programmer</div>
+                                <div class="list-group-item bg-dark mb-1">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="d-flex flex-column">
+                                            <span>${todo.Todo}sssssssssssss</span>
+                                            <span class="badge badge-primary badge-pill">${todo.Date}</span>
+                                        </span>
+                                        <span>
+                                            <button class="btn btn-success" id="check-todo">
+                                                <i class="far fa-check-square"></i>
+                                            </button>
+                                            <button class="btn btn-primary" id="edit-todo" type="button" data-toggle="collapse"
+                                                data-target="#edit-menu" aria-expanded="false" aria-controls="edit-menu">
+                                                <i class="far fa-edit"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="collapse" id="edit-menu">
+                                        <form class="form-inline form-group align-self-center w-100 mx-0 my-2">
+                                            <div class="input-group w-100">
+                                                <input class="form-control bg-dark border-primary w-100 text-white" id="input-edit-todo"
+                                                    type="text" placeholder="Change your todo here">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
