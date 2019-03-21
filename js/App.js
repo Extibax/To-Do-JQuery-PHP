@@ -1,6 +1,8 @@
 $(document).ready(() => {
 
     fetchTodos();
+    alertify.set('notifier','position', 'top-center');
+    alertify.success('All is OK');
 
     $('#form-save-todo').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
@@ -15,25 +17,50 @@ $(document).ready(() => {
     $(document).on('keypress', '#input-edit-todo', function (e) {
         let code = (e.KeyCode ? e.KeyCode : e.which);
         if (code == 13) {
+            e.preventDefault();
             /* TODO: Obtener el ID para poder editar */
-            let element = $(this)[0];
-            console.log(element);
+            let element = $(this)[0].parentElement.parentElement.parentElement.parentElement;
+            let id = $(element).attr('todo-id');
             let input_edit = $(this)[0];
             let input_edit_value = $(input_edit).val();
 
+            postEditTodo = {
+                ID: id,
+                Todo: input_edit_value
+            };
+
             /* TODO: Continuar con el envio del dato editado a la DB */
-            $.post();
+            $.post('./php/edit_todo.php', postEditTodo, (response) => {
+                if (response == 1) {
+                    fetchTodos();
+                    console.log('Edit todo: ' + response);
+                } else {
+                    alertify.error('Something is wrong :(');
+                    /* TODO: Crear una funcion para mostrar los errores al cliente */
+                }
+                /* console.log(response); */
+            });
         }
+    });
+
+    $('#todos').on('click', '#check-todo', function () {
+        let element = $(this)[0].parentElement.parentElement.parentElement;
+        let ID = $(element).attr('todo-id');
+
+        $.post('./php/check_todo.php', { ID }, function(response) {
+            console.log(response);
+            fetchTodos();
+        });
     });
 
 });
 
 function saveTodo() {
-    const postTodoSave = {
+    const postSaveTodo = {
         Todo: $('#input-todo').val()
     };
 
-    $.post('./php/save_todo.php', postTodoSave, (response) => {
+    $.post('./php/save_todo.php', postSaveTodo, (response) => {
         $('#form-save-todo').trigger('reset');
         fetchTodos();
         console.log('Save todo: ' + response);
@@ -48,7 +75,7 @@ function fetchTodos() {
         todos.forEach(todo => {
             template +=
                 `
-                <div class="list-group-item bg-dark mb-1" todo-id="${todo.ID}">
+                <div class="list-group-item bg-dark mb-1" id="todo-container" todo-id="${todo.ID}">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="d-flex flex-column">
                         <span>${todo.Todo}</span>
@@ -59,7 +86,7 @@ function fetchTodos() {
                             data-target="#edit-menu-${todo.ID}" aria-expanded="false" aria-controls="edit-menu-${todo.ID}">
                             <i class="far fa-edit"></i>
                         </button>
-                        <button class="btn btn-success" id="check-todo">
+                        <button class="btn btn-success check-todo" id="check-todo">
                             <i class="far fa-check-square"></i>
                         </button>
                     </span>

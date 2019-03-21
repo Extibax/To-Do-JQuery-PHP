@@ -8,11 +8,15 @@
     <!-- Link Favicon -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <!-- Link Bootstrap -->
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T'
-        crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
+        integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
     <!-- Link Fontawesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Link Alertify CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/alertify.min.css" />
+    <!-- Link Alertify Default Theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/default.min.css" />
     <!-- Link Styles CSS -->
     <link rel="stylesheet" href="style/style.css">
 
@@ -67,8 +71,9 @@
                                             <span class="badge badge-primary badge-pill">${todo.Date}</span>
                                         </span>
                                         <span>
-                                            <button class="btn btn-primary" id="edit-todo" type="button" data-toggle="collapse"
-                                                data-target="#edit-menu-1" aria-expanded="false" aria-controls="edit-menu-1">
+                                            <button class="btn btn-primary" id="edit-todo" type="button"
+                                                data-toggle="collapse" data-target="#edit-menu-1" aria-expanded="false"
+                                                aria-controls="edit-menu-1">
                                                 <i class="far fa-edit"></i>
                                             </button>
                                             <button class="btn btn-success" id="check-todo">
@@ -79,8 +84,9 @@
                                     <div class="collapse" id="edit-menu-1">
                                         <form class="form-inline form-group w-100 mx-0 my-2" id="form-edit-todo">
                                             <div class="input-group w-100">
-                                                <input class="form-control bg-dark border-primary w-100 text-white" id="input-edit-todo"
-                                                    value='${todo.Todo}' type="text" placeholder="Edit your todo here">
+                                                <input class="form-control bg-dark border-primary w-100 text-white"
+                                                    id="input-edit-todo" value='${todo.Todo}' type="text"
+                                                    placeholder="Edit your todo here">
                                             </div>
                                         </form>
                                     </div>
@@ -97,11 +103,15 @@
     <script src='http://code.jquery.com/jquery-3.3.1.js' integrity='sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60='
         crossorigin='anonymous'></script>
     <!-- Script PopperJs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
     <!-- Script Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <!-- Script AlertifyJs -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/alertify.min.js"></script>
     <!-- Script App -->
     <script src="js/App.js"></script>
     <!-- #endregion -->
