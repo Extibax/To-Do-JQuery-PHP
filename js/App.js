@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-    /* fetchTodos(); */
+    fetchTodos();
     alertify.set('notifier','position', 'top-center');
     alertify.success('All is OK');
 
@@ -18,7 +18,6 @@ $(document).ready(() => {
         let code = (e.KeyCode ? e.KeyCode : e.which);
         if (code == 13) {
             e.preventDefault();
-            /* TODO: Obtener el ID para poder editar */
             let element = $(this)[0].parentElement.parentElement.parentElement.parentElement;
             let id = $(element).attr('todo-id');
             let input_edit = $(this)[0];
@@ -29,7 +28,6 @@ $(document).ready(() => {
                 Todo: input_edit_value
             };
 
-            /* TODO: Continuar con el envio del dato editado a la DB */
             $.post('./php/edit_todo.php', postEditTodo, (response) => {
                 if (response == 1) {
                     fetchTodos();
@@ -38,7 +36,6 @@ $(document).ready(() => {
                     alertify.error('Something is wrong :(');
                     /* TODO: Crear una funcion para mostrar los errores al cliente */
                 }
-                /* console.log(response); */
             });
         }
     });
@@ -51,6 +48,14 @@ $(document).ready(() => {
             console.log(response);
             fetchTodos();
         });
+    });
+
+    $('#todos').on('click', '#btnSelectDate', function() {
+        let element = $(this)[0].parentElement.parentElement.parentElement;
+        let ID = $(element).attr('todo-id');
+        console.log(element);
+        console.log(ID);
+        $('.datePickerID-'+ID).datetimepicker();
     });
 
 });
@@ -82,6 +87,10 @@ function fetchTodos() {
                         <span class="badge badge-primary badge-pill">${todo.Date}</span>
                     </span>
                     <span>
+                        <input type="text" class="datePickerID-${todo.ID}" id="dueDatePicker">
+                        <button class="btn btn-secondary" id="btnSelectDate">
+                            <i class="far fa-calendar-check"></i>
+                        </button>
                         <button class="btn btn-primary" id="btn-edit-todo" type="button" data-toggle="collapse"
                             data-target="#edit-menu-${todo.ID}" aria-expanded="false" aria-controls="edit-menu-${todo.ID}">
                             <i class="far fa-edit"></i>
@@ -106,8 +115,4 @@ function fetchTodos() {
         $('#todos').html(template);
 
     })
-}
-
-function editTodo() {
-
 }
