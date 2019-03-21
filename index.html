@@ -60,27 +60,27 @@
                         </div>
                         <div class="row">
                             <div class="list-group w-100" id="todos">
-                                <div class="list-group-item bg-dark mb-1">
+                                <div class="list-group-item bg-dark mb-1" todo-id="${todo.ID}">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="d-flex flex-column">
-                                            <span>${todo.Todo}sssssssssssss</span>
+                                            <span>${todo.Todo}</span>
                                             <span class="badge badge-primary badge-pill">${todo.Date}</span>
                                         </span>
                                         <span>
+                                            <button class="btn btn-primary" id="edit-todo" type="button" data-toggle="collapse"
+                                                data-target="#edit-menu-1" aria-expanded="false" aria-controls="edit-menu-1">
+                                                <i class="far fa-edit"></i>
+                                            </button>
                                             <button class="btn btn-success" id="check-todo">
                                                 <i class="far fa-check-square"></i>
                                             </button>
-                                            <button class="btn btn-primary" id="edit-todo" type="button" data-toggle="collapse"
-                                                data-target="#edit-menu" aria-expanded="false" aria-controls="edit-menu">
-                                                <i class="far fa-edit"></i>
-                                            </button>
                                         </span>
                                     </div>
-                                    <div class="collapse" id="edit-menu">
-                                        <form class="form-inline form-group align-self-center w-100 mx-0 my-2" id="form-edit-todo">
+                                    <div class="collapse" id="edit-menu-1">
+                                        <form class="form-inline form-group w-100 mx-0 my-2" id="form-edit-todo">
                                             <div class="input-group w-100">
                                                 <input class="form-control bg-dark border-primary w-100 text-white" id="input-edit-todo"
-                                                    type="text" placeholder="Change your todo here">
+                                                    value='${todo.Todo}' type="text" placeholder="Edit your todo here">
                                             </div>
                                         </form>
                                     </div>
@@ -90,7 +90,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- #region -->
