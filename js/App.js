@@ -15,10 +15,13 @@ $(document).ready(() => {
     $(document).on('keypress', '#input-edit-todo', function (e) {
         let code = (e.KeyCode ? e.KeyCode : e.which);
         if (code == 13) {
+            /* TODO: Obtener el ID para poder editar */
+            let element = $(this)[0];
+            console.log(element);
             let input_edit = $(this)[0];
             let input_edit_value = $(input_edit).val();
 
-            //TODO: Continuar con el envio del dato editado a la DB
+            /* TODO: Continuar con el envio del dato editado a la DB */
             $.post();
         }
     });
