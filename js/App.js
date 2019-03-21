@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-    fetchTodos();
+    /* fetchTodos(); */
     alertify.set('notifier','position', 'top-center');
     alertify.success('All is OK');
 
