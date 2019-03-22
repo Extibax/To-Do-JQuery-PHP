@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/alertify.min.css" />
     <!-- Link Alertify Default Theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/default.min.css" />
-    <!-- Link DataTimePicker -->
-    <link rel="stylesheet" href="lib/Date-Time-Picker-Bootstrap-4/build/css/bootstrap-datetimepicker.css">
+    <!-- Link DatePicker -->
+    <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <!-- Link Styles CSS -->
     <link rel="stylesheet" href="style/style.css">
 
@@ -68,20 +68,28 @@
                         </div>
                         <div class="row">
                             <div class="list-group w-100" id="todos">
-                                <div class="list-group-item bg-dark mb-1" todo-id="${todo.ID}">
+                                <div class="list-group-item bg-dark mb-1" id="todo-container" todo-id="${todo.ID}">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="d-flex flex-column">
-                                            <span>${todo.Todo}aaaa</span>
+                                            <span>${todo.Todo}</span>
                                             <span class="badge badge-primary badge-pill">${todo.Date}</span>
                                         </span>
                                         <span>
-                                            <input type="text" id="dueDatePicker">
-                                            <button class="btn btn-primary" id="edit-todo" type="button"
+                                            <input id="datepicker" type="text">
+                                            <input id="dueDatePicker" type="text">
+                                            <span class="time-wrapper input-group-sm">
+                                                <input class="input-time" id="input-time-hour" type="number" value="12"
+                                                    min="0" max="12">
+                                                :
+                                                <input class="input-time" id="input-time-min" type="number" value="30"
+                                                    min="0" max="60">
+                                            </span>
+                                            <button class="btn btn-primary" id="btn-edit-todo" type="button"
                                                 data-toggle="collapse" data-target="#edit-menu-1" aria-expanded="false"
                                                 aria-controls="edit-menu-1">
                                                 <i class="far fa-edit"></i>
                                             </button>
-                                            <button class="btn btn-success" id="check-todo">
+                                            <button class="btn btn-success check-todo" id="check-todo">
                                                 <i class="far fa-check-square"></i>
                                             </button>
                                         </span>
@@ -117,12 +125,12 @@
     </script>
     <!-- Script AlertifyJs -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/alertify.min.js"></script>
+    <!-- Script DatePicker -->
+    <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
+
+
     <!-- Script App -->
     <script src="js/App.js"></script>
-    <!-- Script MomentJs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
-    <!-- Script DataTimePickerJs -->
-    <script src="lib/Date-Time-Picker-Bootstrap-4/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- #endregion -->
 
 </body>

@@ -1,8 +1,13 @@
 $(document).ready(() => {
 
-    fetchTodos();
+    /* fetchTodos(); */
+    
     alertify.set('notifier','position', 'top-center');
     alertify.success('All is OK');
+
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
 
     $('#form-save-todo').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
@@ -48,14 +53,6 @@ $(document).ready(() => {
             console.log(response);
             fetchTodos();
         });
-    });
-
-    $('#todos').on('click', '#btnSelectDate', function() {
-        let element = $(this)[0].parentElement.parentElement.parentElement;
-        let ID = $(element).attr('todo-id');
-        console.log(element);
-        console.log(ID);
-        $('.datePickerID-'+ID).datetimepicker();
     });
 
 });
