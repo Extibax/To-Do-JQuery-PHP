@@ -6,9 +6,13 @@ $(document).ready(() => {
     alertify.success('All is OK');
 
     /* TODO: Continuar con el Date Picker */
-    $('#datepicker').datepicker({
+    /* $('#input-date').datepicker({
         uiLibrary: 'bootstrap4'
-    });
+    }); */
+
+    /* $('#input-date').timepicker(); */
+
+    $('#input-date').datetimepicker({ footer: true, modal: true });
 
     $('#form-save-todo').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
@@ -25,7 +29,7 @@ $(document).ready(() => {
         if (code == 13) {
             e.preventDefault();
             let element = $(this)[0].parentElement.parentElement.parentElement.parentElement;
-            let id = $(element).attr('todo-id');
+            let id = $(element).attr($('#input-date').timepicker();'todo-id');
             let input_edit = $(this)[0];
             let input_edit_value = $(input_edit).val();
 
