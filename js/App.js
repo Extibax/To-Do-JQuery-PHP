@@ -5,6 +5,7 @@ $(document).ready(() => {
     alertify.set('notifier','position', 'top-center');
     alertify.success('All is OK');
 
+    /* TODO: Continuar con el Date Picker */
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4'
     });
