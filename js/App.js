@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-    /* fetchTodos(); */
+    fetchTodos();
     
     alertify.set('notifier','position', 'top-center');
     alertify.success('All is OK');
@@ -29,7 +29,7 @@ $(document).ready(() => {
         if (code == 13) {
             e.preventDefault();
             let element = $(this)[0].parentElement.parentElement.parentElement.parentElement;
-            let id = $(element).attr($('#input-date').timepicker();'todo-id');
+            let id = $(element).attr('todo-id');
             let input_edit = $(this)[0];
             let input_edit_value = $(input_edit).val();
 
