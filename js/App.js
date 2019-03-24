@@ -53,13 +53,15 @@ $(document).ready(() => {
         });
     });
 
-    $('#input-todo').on('focus keypress', function () {
+    $('#input-todo').on('keypress', function () {
         $('#form-date-time').collapse('show');
     });
 
-    $('#input-todo').focusout(function () {
-        $('#form-date-time').collapse('hide');
+    $('#btn-form-save-todo').click(function () {
+        $('#form-date-time').collapse('toggle');
     });
+
+    //TODO: Continuar con la maquetacion de los todos
 });
 
 function saveTodo() {
