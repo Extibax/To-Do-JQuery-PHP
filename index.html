@@ -8,19 +8,16 @@
     <!-- Link Favicon -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <!-- Link Bootstrap -->
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
-        integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+    <link rel="stylesheet" href="lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <!-- Link Fontawesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <!-- Link Bootstrap Fontawesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/fontawesome-free-5.8.1-web/css/all.min.css">
     <!-- Link Alertify CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="lib/alertifyjs/css/alertify.min.css">
     <!-- Link Alertify Default Theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/default.min.css" />
+    <link rel="stylesheet" href="lib/alertifyjs/css/themes/default.min.css">
     <!-- Link DatePicker -->
-    <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
     <!-- Link Styles CSS -->
     <link rel="stylesheet" href="style/style.css">
 
@@ -52,55 +49,84 @@
             <div class="container text-white">
                 <div class="row">
                     <div class="col-md-3 sidebar d-flex flex-column pt-5">
-                        <div class="text-center">
-                            <img class="img-fluid sidebar-logo" src="img/Logotype.png" alt="Extbax Logotype">
-                            <h3 class="text-center">Extibax Developer</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <img class="img-fluid sidebar-logo" src="img/Logotype.png" alt="Extbax Logotype">
+                                    <h3 class="text-center">Extibax Developer</h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-9 pt-5">
                         <div class="row">
-                            <form class="form-inline form-group w-100" id="form-save-todo">
-                                <div class="input-group-lg w-100">
-                                    <input class="form-control bg-dark border-dark w-100 text-white" id="input-todo"
-                                        type="text" placeholder="Enter your To Do:">
+                            <div class="col-md-12">
+                                <div class="form-inline form-group d-flex flex-column w-100" id="form-save-todo">
+                                    <div class="input-group input-group-lg w-100">
+                                        <input class="form-control bg-dark border-dark text-white" id="input-todo"
+                                            type="text" placeholder="Enter your To Do:" autofocus>
+                                    </div>
+                                    <button class="input-group-text bg-dark border-dark" id="btn-show-form-todo"
+                                        data-toggle="collapse" data-target="#form-date-time" style="display: none">
+                                    </button>
+                                    <div class="collapse" id="form-date-time">
+                                        <div class="d-flex flex-column bg-dark w-100 m-auto">
+                                            <span class="time-wrapper input-group-md mb-2">
+                                                <input class="input-time form-control bg-dark text-white"
+                                                    id="input-time-hour" type="number" value="12" min="0" max="12">
+                                                :
+                                                <input class="input-time form-control bg-dark text-white"
+                                                    id="input-time-min" type="number" value="30" min="0" max="60">
+                                            </span>
+                                            <input class="form-control bg-dark text-white" id="datepicker" type="text"
+                                                width="150" autocomplete="off">
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="list-group w-100" id="todos">
-                                <div class="list-group-item bg-dark mb-1" id="todo-container" todo-id="${todo.ID}">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="d-flex flex-column">
-                                            <span>${todo.Todo}</span>
-                                            <span class="badge badge-primary badge-pill">${todo.Date}</span>
-                                        </span>
-                                        <span>
-                                            <input class="d-flex flex-row bg-dark border-danger" id="input-date" type="text">
-                                            <span class="time-wrapper input-group-sm">
-                                                <input class="input-time" id="input-time-hour" type="number" value="12"
-                                                    min="0" max="12">
-                                                :
-                                                <input class="input-time" id="input-time-min" type="number" value="30"
-                                                    min="0" max="60">
+                            <div class="col-md-12">
+                                <div class="list-group w-100" id="todos">
+                                    <div class="list-group-item bg-dark mb-1" id="todo-container" todo-id="${todo.ID}">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="d-flex flex-column">
+                                                <span>${todo.Todo}</span>
+                                                <span class="badge badge-primary badge-pill">${todo.Date}</span>
                                             </span>
-                                            <button class="btn btn-primary" id="btn-edit-todo" type="button"
-                                                data-toggle="collapse" data-target="#edit-menu-1" aria-expanded="false"
-                                                aria-controls="edit-menu-1">
-                                                <i class="far fa-edit"></i>
-                                            </button>
-                                            <button class="btn btn-success check-todo" id="check-todo">
-                                                <i class="far fa-check-square"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div class="collapse" id="edit-menu-1">
-                                        <form class="form-inline form-group w-100 mx-0 my-2" id="form-edit-todo">
-                                            <div class="input-group w-100">
-                                                <input class="form-control bg-dark border-primary w-100 text-white"
-                                                    id="input-edit-todo" value='${todo.Todo}' type="text"
-                                                    placeholder="Edit your todo here">
-                                            </div>
-                                        </form>
+                                            <span>
+                                                <button class="btn btn-primary" id="btn-edit-todo" type="button"
+                                                    data-toggle="collapse" data-target="#edit-menu-1"
+                                                    aria-expanded="false" aria-controls="edit-menu-1">
+                                                    <i class="far fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-success check-todo" id="check-todo">
+                                                    <i class="far fa-check-square"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <div class="collapse" id="edit-menu-1">
+                                            <form class="form-inline form-group w-100 mx-0 my-2" id="form-edit-todo">
+                                                <div class="input-group w-100">
+                                                    <input class="form-control bg-dark w-100 text-white mb-3"
+                                                        id="input-edit-todo" value='${todo.Todo}' type="text"
+                                                        placeholder="Edit your todo here">
+                                                    <div class="form-group d-flex flex-column m-auto">
+                                                        <span class="time-wrapper input-group-md mb-2">
+                                                            <input class="input-time form-control bg-dark text-white"
+                                                                id="input-time-hour" type="number" value="12" min="0"
+                                                                max="12">
+                                                            :
+                                                            <input class="input-time form-control bg-dark text-white"
+                                                                id="input-time-min" type="number" value="30" min="0"
+                                                                max="60">
+                                                        </span>
+                                                        <input class="form-control bg-dark text-white" id="datepicker"
+                                                            type="text" width="150" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -112,25 +138,25 @@
 
     <!-- #region -->
     <!-- Script JQuery -->
-    <script src='http://code.jquery.com/jquery-3.3.1.js' integrity='sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60='
-        crossorigin='anonymous'></script>
+    <script src="lib/jquery-3.3.1.min.js"></script>
     <!-- Script PopperJs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+    <script src="lib/popper.min.js"></script>
     <!-- Script Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+    <script src="lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
     <!-- Script AlertifyJs -->
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/alertify.min.js"></script>
+    <script src="lib/alertifyjs/alertify.min.js"></script>
     <!-- Script DatePicker -->
-    <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
-
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
     <!-- Script App -->
     <script src="js/App.js"></script>
     <!-- #endregion -->
+
+    <script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
 
 </body>
 

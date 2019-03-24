@@ -1,18 +1,9 @@
 $(document).ready(() => {
 
-    fetchTodos();
-    
-    alertify.set('notifier','position', 'top-center');
+    /* fetchTodos(); */
+
+    alertify.set('notifier', 'position', 'top-center');
     alertify.success('All is OK');
-
-    /* TODO: Continuar con el Date Picker */
-    /* $('#input-date').datepicker({
-        uiLibrary: 'bootstrap4'
-    }); */
-
-    /* $('#input-date').timepicker(); */
-
-    $('#input-date').datetimepicker({ footer: true, modal: true });
 
     $('#form-save-todo').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
@@ -54,12 +45,21 @@ $(document).ready(() => {
         let element = $(this)[0].parentElement.parentElement.parentElement;
         let ID = $(element).attr('todo-id');
 
-        $.post('./php/check_todo.php', { ID }, function(response) {
+        $.post('./php/check_todo.php', {
+            ID
+        }, function (response) {
             console.log(response);
             fetchTodos();
         });
     });
 
+    $('#input-todo').on('focus keypress', function () {
+        $('#form-date-time').collapse('show');
+    });
+
+    $('#input-todo').focusout(function () {
+        $('#form-date-time').collapse('hide');
+    });
 });
 
 function saveTodo() {
