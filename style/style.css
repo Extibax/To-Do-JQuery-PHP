@@ -34,11 +34,23 @@
     cursor: pointer !important;
 }
 
-/* .input-time {
-    width: 44px;
+/* .input-time .form-control  {
+    width: 10px !important;
     height: 38px;
     text-align: center;
 } */
+
+.bg-white-bar {
+    background: #f1f2f4 !important;
+}
+
+#form-save-todo {
+    /* opacity: 0.5; */
+}
+
+.bg-dark-opa {
+    background: rgba(55, 59, 67, .5);
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

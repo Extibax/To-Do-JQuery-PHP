@@ -61,75 +61,45 @@
                     <div class="col-md-9 pt-5">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group d-flex flex-column bg-dark" id="form-save-todo">
+                                <div class="form-group d-flex flex-column" id="form-save-todo">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <button class="input-group-text d-flex bg-dark text-white"
+                                                <input class="form-control bg-White" id="input-todo" type="text"
+                                                    placeholder="Enter your To Do:" autofocus>
+                                                <div class="input-group-append">
+                                                    <button class="input-group-text d-flex bg-dark text-muted"
                                                         id="btn-form-save-todo">
                                                         <i class="far fa-eye"></i>
                                                     </button>
                                                 </div>
-                                                <input class="form-control bg-dark text-white" id="input-todo"
-                                                    type="text" placeholder="Enter your To Do:" autofocus>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="collapse-" id="form-date-time">
+                                    <div class="collapse" id="form-date-time">
                                         <div class="row mt-3">
                                             <div class="col-md-12">
-                                                <div class="d-flex flex-column m-auto">
-                                                    <div class="row">
-                                                        <div class="col-md-8 d-flex">
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <button class="input-group-text bg-dark text-white">
-                                                                        <i class="far fa-clock"></i>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-5 pr-1">
-                                                                        <input
-                                                                            class="input-time form-control bg-dark text-white"
-                                                                            id="input-time-hour" type="number"
-                                                                            value="12" min="0" max="12">
-                                                                    </div>
-                                                                    <span class="align-self-center">:</span>
-                                                                    <div class="col-md-5 pl-1">
-                                                                        <input
-                                                                            class="input-time form-control bg-dark text-white"
-                                                                            id="input-time-min" type="number" value="30"
-                                                                            min="0" max="60">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <button class="input-group-text bg-dark text-white">
-                                                                        <i class="far fa-calendar"></i>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <input class="form-control bg-dark text-white"
-                                                                            id="datepicker" type="text" width="100"
-                                                                            autocomplete="off">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                <div class="row d-flex justify-content-between m-auto">
+                                                    <div class="col-md-6 pb-3">
+                                                        <div class="input-group bg-dark">
+                                                            <input class="form-control bg-white" type="text"
+                                                                id="datepicker" placeholder="Enter Due Date"
+                                                                autocomplete="off">
                                                         </div>
-                                                        <div class="col-md-4">highlight
-                                                            <div class="row d-flex justify-content-end">
-                                                                <div
-                                                                    class="">
-                                                                    <select class="form-control bg-dark text-white"
-                                                                        name="todo_category" id="">
-                                                                        <option value="One">One</option>
-                                                                        <option value="One">Twp</option>
-                                                                        <option value="One">Three</option>
-                                                                    </select>
-                                                                </div>
+                                                    </div>
+                                                    <div class="col-md-6 pb-3">
+                                                        <div class="input-group d-flex">
+                                                            <select class="form-control bg-white" name="todo_category"
+                                                                id="">
+                                                                <option value="One">One</option>
+                                                                <option value="One">Twp</option>
+                                                                <option value="One">Three</option>
+                                                            </select>
+                                                            <div class="input-group-append">
+                                                                <button
+                                                                    class="input-group-text d-flex bg-dark text-muted">
+                                                                    <i class="far fa-folder"></i>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -161,26 +131,35 @@
                                             </span>
                                         </div>
                                         <div class="collapse" id="edit-menu-1">
-                                            <form class="form-inline form-group w-100 mx-0 my-2" id="form-edit-todo">
-                                                <div class="input-group w-100">
-                                                    <input class="form-control bg-dark w-100 text-white mb-3"
-                                                        id="input-edit-todo" value='${todo.Todo}' type="text"
-                                                        placeholder="Edit your todo here">
-                                                    <div class="form-group d-flex flex-column m-auto">
-                                                        <span class="time-wrapper input-group-md mb-2">
-                                                            <input class="input-time form-control bg-dark text-white"
-                                                                id="input-time-hour" type="number" value="12" min="0"
-                                                                max="12">
-                                                            :
-                                                            <input class="input-time form-control bg-dark text-white"
-                                                                id="input-time-min" type="number" value="30" min="0"
-                                                                max="60">
-                                                        </span>
-                                                        <input class="form-control bg-dark text-white" id="datepicker"
-                                                            type="text" width="150" autocomplete="off">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="row d-flex justify-content-between m-auto">
+                                                        <div class="col-md-6 pb-3">
+                                                            <div class="input-group bg-dark">
+                                                                <input class="form-control bg-white" type="text"
+                                                                    id="input-edit-date-1" placeholder="Enter Due Date"
+                                                                    autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 pb-3">
+                                                            <div class="input-group d-flex">
+                                                                <select class="form-control bg-white"
+                                                                    name="todo_category" id="">
+                                                                    <option value="One">One</option>
+                                                                    <option value="One">Twp</option>
+                                                                    <option value="One">Three</option>
+                                                                </select>
+                                                                <div class="input-group-append">
+                                                                    <button
+                                                                        class="input-group-text d-flex bg-dark text-muted">
+                                                                        <i class="far fa-folder"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -207,14 +186,6 @@
     <!-- Script App -->
     <script src="js/App.js"></script>
     <!-- #endregion -->
-
-    <script>
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap4',
-            showOnFocus: true,
-            showRightIcon: false
-        });
-    </script>
 
 </body>
 

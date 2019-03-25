@@ -5,6 +5,18 @@ $(document).ready(() => {
     alertify.set('notifier', 'position', 'top-center');
     alertify.success('All is OK');
 
+    $('#input-edit-date-1').datetimepicker({
+        uiLibrary: 'bootstrap4',
+        footer: true,
+        showRightIcon: false
+    });
+
+    $('#datepicker').datetimepicker({
+        uiLibrary: 'bootstrap4',
+        footer: true,
+        showRightIcon: false
+    });
+
     $('#form-save-todo').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         console.log(code);
