@@ -29,18 +29,25 @@
     <!-- Navbar -->
     <header class="navbar navbar-expand-lg navbar-dark bg-dark-lux d-flex justify-content-between">
         <div class="container">
-            <div class="navbar-brand">
-                <img class="img-fluid header-logo" src="img/Logotype.png" alt="extibax.inc logo">
-                <a class="text-white" href="index.html">
-                    To Do
-                </a>
+            <div class="d-flex">
+                <div class="navbar-brand">
+                    <img class="header-logo" src="img/Logotype.png" alt="extibax.inc logo">
+                    <a class="text-white" href="index.html">
+                        To Do
+                    </a>
+                </div>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle Navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
-            <ul class="navbar-nav">
-                <li class="nav-item"><a href="#" class="nav-link ">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link active">To Do</a></li>
-                <li class="nav-item"><a href="#" class="nav-link ">Portfolio</a></li>
-                <li class="nav-item"><a href="#" class="nav-link ">Be Programmer</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="#" class="nav-link ">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link active">To Do</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link ">Portfolio</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link ">Be Programmer</a></li>
+                </ul>
+            </div>
         </div>
     </header>
 
@@ -48,11 +55,11 @@
         <div class="//background-overlay">
             <div class="container text-white">
                 <div class="row">
-                    <div class="col-md-3 sidebar d-flex flex-column pt-5">
+                    <div class="col-md-3 sidebar d-flex flex-column mt-2 mt-md-5" >
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <img class="img-fluid sidebar-logo" src="img/Logotype.png" alt="Extbax Logotype">
+                                    <img class="sidebar-logo" src="img/Logotype.png" alt="Extbax Logotype">
                                     <h3 class="text-center">Extibax Developer</h3>
                                 </div>
                             </div>
