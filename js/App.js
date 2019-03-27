@@ -71,35 +71,28 @@ $(document).ready(() => {
         let element = $(this)[0].parentElement.parentElement.parentElement;
         let ID = $(element).attr('todo-id');
 
-        $('#input-edit-date-' + ID).datetimepicker({
-            uiLibrary: 'bootstrap4',
-            footer: true,
-            showRightIcon: false,
-            format: 'h:MM TT yyyy-mm-dd',
-            value: getCurrentDateTime()
+        $.post('./php/fetch_one_todo.php', {
+            ID: ID
+        }, function (response) {
+
+            let todo = JSON.parse(response);
+            let date = new Date(todo.Due_date);
+            let dateFormated = dateFormat(date, 'h:MM TT yyyy-mm-dd');
+
+            $('#input-edit-date-' + ID).datetimepicker({
+                uiLibrary: 'bootstrap4',
+                footer: true,
+                showRightIcon: false,
+                format: 'h:MM TT yyyy-mm-dd',
+                value: dateFormated
+            });
         });
     });
-
-    console.log(getUserTodo(3));
 
 });
 
 function getCurrentDateTime() {
     return dateFormat(new Date(), "h:MM TT yyyy-mm-dd");
-}
-
-function getUserTodo(ID) {
-    $.post('./php/fetch_one_todo.php', {
-        ID: ID
-    }, function (response) {
-        let todo = JSON.parse(response);
-        //TODO: Continuar con la creacion de un metodo para retornar la fecha del usuario
-        getUserDateTime(todo);
-    });
-}
-
-function getUserDateTime(todo) {
-    return todo;
 }
 
 function saveTodo() {
@@ -123,7 +116,7 @@ function fetchTodos() {
 
             template +=
                 `
-                <div class="list-group-item bg-dark mb-1" id="todo-container" todo-id="${todo.ID}">
+                <div class="list-group-item bg-dark-lux mb-1" id="todo-container" todo-id="${todo.ID}">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="d-flex flex-column">
                                                 <div class="row">
@@ -155,14 +148,14 @@ function fetchTodos() {
                                             <div class="row mt-3">
                                                 <div class="col-md-12">
                                                     <div class="row d-flex justify-content-between m-auto">
-                                                        <div class="col-md-6 pb-3">
+                                                        <div class="col-md-5 pb-3">
                                                             <div class="input-group bg-dark">
                                                                 <input class="form-control bg-white" type="text"
                                                                     id="input-edit-date-${todo.ID}" placeholder="Enter Due Date"
                                                                     autocomplete="off">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6 pb-3">
+                                                        <div class="col-md-5 pb-3">
                                                             <div class="input-group d-flex">
                                                                 <select class="form-control bg-white"
                                                                     name="todo_category" id="">
@@ -177,6 +170,9 @@ function fetchTodos() {
                                                                     </button>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-2 ">
+                                                            <button class="btn btn-dark"><i class="far fa-save"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
