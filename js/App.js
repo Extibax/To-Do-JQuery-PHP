@@ -56,15 +56,17 @@ $(document).ready(() => {
     });
 
     $('#todos').on('click', '#check-todo', function () {
-        let element = $(this)[0].parentElement.parentElement.parentElement;
-        let ID = $(element).attr('todo-id');
+        if (confirm('¿Are you sure?')) {
+            let element = $(this)[0].parentElement.parentElement.parentElement;
+            let ID = $(element).attr('todo-id');
 
-        $.post('./php/check_todo.php', {
-            ID: ID
-        }, function (response) {
-            console.log(response);
-            fetchTodos();
-        });
+            $.post('./php/check_todo.php', {
+                ID: ID
+            }, function (response) {
+                console.log(response);
+                fetchTodos();
+            });
+        }
     });
 
     $('#todos').on('click', '#btn-edit-todo', function () {
@@ -79,7 +81,7 @@ $(document).ready(() => {
             let date = new Date(todo.Due_date);
             let dateFormated = dateFormat(date, 'h:MM TT yyyy-mm-dd');
 
-            $('#input-edit-date-' + ID).datetimepicker({
+            $('#input_edit_date_' + ID).datetimepicker({
                 uiLibrary: 'bootstrap4',
                 footer: true,
                 showRightIcon: false,
@@ -87,6 +89,27 @@ $(document).ready(() => {
                 value: dateFormated
             });
         });
+    });
+
+    $('#todos').on('click', '#btn_save_changes_todo', function () {
+        let buttonRoot = $(this)[0];
+
+        let element_id = $(buttonRoot).parents('#todo-container');
+        let ID = $(element_id).attr('todo-id');
+
+        let edit_menu_elements = $(buttonRoot).parents('#edit-menu-' + ID)
+
+        let input_todo = $(edit_menu_elements).find('input#input_edit_todo').val();
+        console.log(input_todo);
+
+        let input_date = $(edit_menu_elements).find('input#input_edit_date_' + ID).val();
+        console.log(input_date);
+
+        let input_category = $(edit_menu_elements).find('#input_edit_category').find(':selected').val();
+        console.log(input_category);
+
+        //TODO: Crear un post para los datos editados.
+
     });
 
 });
@@ -127,9 +150,9 @@ function fetchTodos() {
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex">
                                                         <span class="badge badge-primary badge-pill align-self-start"><i
-                                                                class="far fa-calendar"></i> ${todo.Date}</span>
+                                                                class="far fa-calendar"></i> ${todo.Due_date}</span>
                                                         <span class="badge badge-primary badge-pill align-self-start ml-1"><i
-                                                                class="far fa-clock"></i> ${todo.Date}</span>
+                                                                class="far fa-clock"></i> ${todo.Due_date}</span>
                                                     </div>
                                                 </div>
                                             </span>
@@ -145,23 +168,28 @@ function fetchTodos() {
                                             </span>
                                         </div>
                                         <div class="collapse" id="edit-menu-${todo.ID}">
-                                            <div class="row mt-3">
+                                            <div class="row mt-4">
+                                                <div class="col-md-12">
+                                                    <input class="form-control" id="input_edit_todo" type="text" value="${todo.Todo}" placeholder="Edit your todo here"/>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
                                                 <div class="col-md-12">
                                                     <div class="row d-flex justify-content-between m-auto">
                                                         <div class="col-md-5 pb-3">
                                                             <div class="input-group bg-dark">
                                                                 <input class="form-control bg-white" type="text"
-                                                                    id="input-edit-date-${todo.ID}" placeholder="Enter Due Date"
+                                                                    id="input_edit_date_${todo.ID}" placeholder="Edit your Due Date here"
                                                                     autocomplete="off">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5 pb-3">
                                                             <div class="input-group d-flex">
                                                                 <select class="form-control bg-white"
-                                                                    name="todo_category" id="">
+                                                                    name="todo_category" id="input_edit_category">
                                                                     <option value="One">One</option>
-                                                                    <option value="One">Two</option>
-                                                                    <option value="One">Three</option>
+                                                                    <option value="Two">Two</option>
+                                                                    <option value="Three">Three</option>
                                                                 </select>
                                                                 <div class="input-group-append">
                                                                     <button
@@ -172,7 +200,7 @@ function fetchTodos() {
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 ">
-                                                            <button class="btn btn-dark"><i class="far fa-save"></i></button>
+                                                            <button class="btn btn-dark" id="btn_save_changes_todo"><i class="far fa-save"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
