@@ -1,3 +1,0 @@
-Options All -Indexes
-ErrorDocument 404 /error_pages/error_404.html
-ErrorDocument 403 /error_pages/error_403.html
