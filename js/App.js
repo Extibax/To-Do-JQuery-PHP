@@ -137,6 +137,9 @@ function fetchTodos() {
 
         todos.forEach(todo => {
 
+            let due_Date = dateFormat(new Date(todo.Due_date), "hh:MM TT,yyyy-mm-dd");
+            let due_Date_Array = due_Date.split(",");
+
             template +=
                 `
                 <div class="list-group-item bg-dark-lux mb-1" id="todo-container" todo-id="${todo.ID}">
@@ -150,9 +153,9 @@ function fetchTodos() {
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex">
                                                         <span class="badge badge-primary badge-pill align-self-start"><i
-                                                                class="far fa-calendar"></i> ${todo.Due_date}</span>
+                                                                class="far fa-calendar"></i> ${due_Date_Array[0]}</span>
                                                         <span class="badge badge-primary badge-pill align-self-start ml-1"><i
-                                                                class="far fa-clock"></i> ${todo.Due_date}</span>
+                                                                class="far fa-clock"></i> ${due_Date_Array[1]}</span>
                                                     </div>
                                                 </div>
                                             </span>

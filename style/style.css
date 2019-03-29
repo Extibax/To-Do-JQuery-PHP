@@ -1,3 +1,11 @@
+body {
+    /* background: url('../img/4k-wallpaper-calm-waters-dark-1252869.jpg') #F5F5F5; */
+    background-image: url('../img/starry_sky_night_mountains_117812_3840x2160.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .bg-dark-lux {
     background: #1A1A1A;
 }
@@ -7,9 +15,6 @@
 }
 
 .main-section {
-    background: url('../img/4k-wallpaper-calm-waters-dark-1252869.jpg') #F5F5F5;
-    background-size: cover;
-    position: relative;
     min-height: 90vmin;
 }
 
