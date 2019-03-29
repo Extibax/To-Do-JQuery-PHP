@@ -16,6 +16,6 @@ while($todo = mysqli_fetch_array($result))
     $todos[] = $todo;
 }
 
-$todos_string = json_encode($todos);
+$todos_json = json_encode($todos);
 
-echo $todos_string;
+echo $todos_json;
