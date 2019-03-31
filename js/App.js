@@ -18,6 +18,7 @@ $(document).ready(() => {
             e.preventDefault();
             saveTodo();
             fetchTodos();
+            clearFormTodo();
         }
     });
 
@@ -116,6 +117,13 @@ $(document).ready(() => {
 
 function getCurrentDateTime() {
     return dateFormat(new Date(), "h:MM TT yyyy-mm-dd");
+}
+
+function clearFormTodo() {
+    $('#input-todo').val('');
+    $('#datepicker').val('');
+    /* $('#input-select-category option:contains("2")').prop('selected',true); */
+    $('#input-select-category').val(1);
 }
 
 function saveTodo() {

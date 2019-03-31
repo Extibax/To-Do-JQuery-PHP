@@ -6,6 +6,12 @@ body {
     background-attachment: fixed;
 }
 
+select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+
 .bg-dark-lux {
     background: #1A1A1A;
 }
@@ -49,8 +55,9 @@ body {
     background: #f1f2f4 !important;
 }
 
-#form-save-todo {
-    /* opacity: 0.5; */
+#form-save-todo button{
+    width: 38px;
+    justify-content: center;
 }
 
 .bg-dark-opa {
@@ -99,9 +106,17 @@ input[type="color"]:focus,
 
 /* Media Queries */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
+    #todos span {
+        max-width: 200px;
+    }
+
     .header-logo {
         width: 15%;
+    }
+
+    .sidebar {
+        min-height: 0;
     }
 
     .sidebar-logo {
