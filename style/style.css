@@ -1,23 +1,48 @@
 body {
     /* background: url('../img/4k-wallpaper-calm-waters-dark-1252869.jpg') #F5F5F5; */
-    background-image: url('../img/starry_sky_night_mountains_117812_3840x2160.jpg');
+    /* background-image: url('../img/starry_sky_night_mountains_117812_3840x2160.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed; */
+
+    /* background-image: url('../img/starry_sky_night_mountains_117812_3840x2160.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed; */
+
+    background:  #111111/* url('../img/starry_sky_night_mountains_117812_3840x2160.jpg') */ no-repeat fixed center center;
+    background-size: cover;
 }
 
-select {
+/* select {
     -moz-appearance: none;
     text-indent: 0.01px;
     text-overflow: '';
+} */
+
+header .nav-link:-moz-focus-inner,
+header .nav-link:focus,
+header a {
+    border: 0 !important;
+    text-decoration: underline;
+}
+
+header .nav-link:focus,
+header .nav-item:focus {
+    border: 0 !important;
 }
 
 .bg-dark-lux {
     background: #1A1A1A;
 }
 
+.bg-white-bar {
+    background: #ffffff;
+}
+
 .header-logo {
-    width: 7%;
+    width: 9%;
 }
 
 .main-section {
@@ -32,24 +57,9 @@ select {
     width: 50%;
 }
 
-.background-overlay {
-    background: rgba(95, 39, 205, .1);
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-}
-
 .cursor-pointer {
     cursor: pointer !important;
 }
-
-/* .input-time .form-control  {
-    width: 10px !important;
-    height: 38px;
-    text-align: center;
-} */
 
 .bg-white-bar {
     background: #f1f2f4 !important;
@@ -106,20 +116,38 @@ input[type="color"]:focus,
 
 /* Media Queries */
 
-@media only screen and (max-width: 900px) {
-    #todos span {
-        max-width: 200px;
+@media only screen and(max-width: 1000px) {
+    body {
+        background-size: initial;
     }
 
-    .header-logo {
-        width: 15%;
+    .sidebar-logo {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #todos span {
+        max-width: 185px;
     }
 
     .sidebar {
         min-height: 0;
     }
+    
+}
 
+@media only screen and (max-width: 770px) {
     .sidebar-logo {
         width: 20%;
+    }
+}
+@media only screen and (max-width: 420px) {
+    body {
+        background-size: initial;
+    }
+
+    .header-logo {
+        width: 10%;
     }
 }

@@ -3,17 +3,17 @@ $(document).ready(() => {
     fetchTodos();
 
     alertify.set('notifier', 'position', 'top-center');
-    alertify.success('All is OK');
 
     $('#datepicker').datetimepicker({
         uiLibrary: 'bootstrap4',
+        modal: true,
         footer: true,
-        showRightIcon: false
+        showRightIcon: false,
+        format: 'h:MM TT yyyy-mm-dd'
     });
 
     $('#form-save-todo').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
-        console.log(code);
         if (code == 13) {
             e.preventDefault();
             saveTodo();
@@ -22,12 +22,19 @@ $(document).ready(() => {
         }
     });
 
-    $('#input-todo').on('keypress', function () {
-        $('#form-date-time').collapse('show');
+    $('#btn_save_todo').click(function(e) {
+        e.preventDefault();
+        saveTodo();
+        fetchTodos();
+        clearFormTodo();
     });
 
-    $('#btn-form-save-todo').click(function () {
-        $('#form-date-time').collapse('toggle');
+    $('#input-todo').on('keypress', function () {
+        $('#form_new_todo_date').collapse('show');
+    });
+
+    $('#btn_show_new_todo_form').click(function () {
+        $('#form_new_todo_date').collapse('toggle');
     });
 
     $(document).on('keypress', '#input-edit-todo', function (e) {
@@ -84,6 +91,7 @@ $(document).ready(() => {
 
             $('#input_edit_date_' + ID).datetimepicker({
                 uiLibrary: 'bootstrap4',
+                modal: true,
                 footer: true,
                 showRightIcon: false,
                 format: 'h:MM TT yyyy-mm-dd',
@@ -122,7 +130,6 @@ function getCurrentDateTime() {
 function clearFormTodo() {
     $('#input-todo').val('');
     $('#datepicker').val('');
-    /* $('#input-select-category option:contains("2")').prop('selected',true); */
     $('#input-select-category').val(1);
 }
 

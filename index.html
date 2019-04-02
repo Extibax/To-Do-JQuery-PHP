@@ -27,32 +27,31 @@
 <body>
 
     <!-- Navbar -->
-    <header class="navbar navbar-expand-lg navbar-dark bg-dark-lux d-flex justify-content-between">
+    <header class="navbar navbar-expand-md navbar-light bg-light d-flex justify-content-between">
         <div class="container">
             <div class="d-flex">
                 <div class="navbar-brand">
                     <img class="header-logo" src="img/Logotype.png" alt="extibax.inc logo">
-                    <a class="text-white" href="index.html">
+                    <a class="text-dark" href="index.html">
                         To Do
                     </a>
                 </div>
-                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle Navigation">
+                <button class="navbar-toggler text-dark" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle Navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
-            <div class="collapse navbar-collapse d-md-flex justify-content-end" id="navbar">
+                    <div class="collapse navbar-collapse w-100 d-md-flex justify-content-end" id="navbar">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a href="#" class="nav-link ">Home</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link active">To Do</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link ">Portfolio</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link ">Be Programmer</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-dark">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link active text-dark">To Do</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-dark">Portfolio</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-dark">Be Programmer</a></li>
                 </ul>
             </div>
         </div>
     </header>
 
     <section class="main-section">
-        <div class="//background-overlay">
             <div class="container text-white">
                 <div class="row">
                     <div class="col-md-3 sidebar d-flex flex-column mt-2 mt-md-5" >
@@ -76,27 +75,27 @@
                                                     placeholder="Enter your To Do:" autofocus>
                                                 <div class="input-group-append">
                                                     <button class="input-group-text d-flex bg-dark-lux text-muted"
-                                                        id="btn-form-save-todo">
+                                                        id="btn_show_new_todo_form">
                                                         <i class="far fa-eye"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="collapse" id="form-date-time">
+                                    <div class="collapse" id="form_new_todo_date">
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <div class="row d-flex justify-content-between m-auto">
-                                                    <div class="col-md-6 pb-3">
+                                                    <div class="col-md-5 pb-3">
                                                         <div class="input-group bg-dark-lux">
                                                             <input class="form-control bg-white" type="text"
                                                                 id="datepicker" placeholder="Enter Due Date"
                                                                 autocomplete="off" disabled>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 pb-3">
+                                                    <div class="col-md-3 pb-3">
                                                         <div class="input-group d-flex">
-                                                            <select class="form-control bg-white" name="todo_category"
+                                                            <select class="form-control" name="todo_category"
                                                                 id="input-select-category">
                                                                 <option value="1">One</option>
                                                                 <option value="2">Twoo</option>
@@ -109,6 +108,11 @@
                                                                 </button>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="col-md-2 w-100">
+                                                        <button class="btn btn-light form-control w-100">
+                                                            Save
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,7 +189,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </section>
 
