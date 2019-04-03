@@ -1,26 +1,33 @@
 <?php
 
-require_once 'connection.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$query = 
-"SELECT todo.*, category.Name AS 'Category_name'
-FROM users user
-INNER JOIN categories category ON user.ID = category.User_id
-INNER JOIN todos todo ON user.ID = todo.User_id
-ORDER BY todo.ID DESC";
-$result = mysqli_query($connection, $query);
+$_SESSION['User']['ID'] = 1;
 
-if (!$result) {
-    die('Query show todos failed: '.mysqli_error($connection));
+if (isset($_SESSION['User']['ID'])) {
+
+    require_once 'connection.php';
+
+    $ID = $_SESSION['User']['ID'];
+
+    $query = "SELECT * FROM todos WHERE User_id = $ID ORDER BY ID DESC";
+
+    $result = mysqli_query($connection, $query);
+
+    if (!$result) {
+        die('Query show todos failed: ' . mysqli_error($connection));
+    }
+
+    $todos = array();
+
+    while ($todo = mysqli_fetch_assoc($result)) 
+    {
+        $todos[] = $todo;
+    }
+
+    $todos_json = json_encode($todos);
+
+    echo $todos_json;
 }
-
-$todos = array();
-
-while($todo = mysqli_fetch_array($result))
-{
-    $todos[] = $todo;
-}
-
-$todos_json = json_encode($todos);
-
-echo $todos_json;

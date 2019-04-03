@@ -18,4 +18,10 @@ $connection = mysqli_connect(
     $DB
 );
 
+mysqli_set_charset($connection, "utf8");
+
+if ($connection) {
+    session_start();
+}
+
 ?>

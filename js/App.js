@@ -150,8 +150,9 @@ function editTodo(ID) {
 }
 
 function fetchTodos() {
-    $.get('./php/fetch_todos.php', 'aplication/json', (response) => {
+    $.get('./php/fetch_todos.php', 'aplic-ation/json', (response) => {
         let todos = JSON.parse(response);
+        console.log(todos);
         let template = '';
 
         todos.forEach(todo => {
@@ -159,7 +160,6 @@ function fetchTodos() {
             let due_Date = dateFormat(new Date(todo.Due_date), "hh:MM TT,yyyy-mm-dd");
             let due_Date_Array = due_Date.split(",");
             let category = todo.Category_name;
-            console.log(category);
 
             template +=
                 `
@@ -210,7 +210,7 @@ function fetchTodos() {
                                                         <div class="col-md-6 pb-3">
                                                             <div class="input-group d-flex">
                                                                 <select class="form-control bg-white" name="todo_category" id="input_edit_category">
-                                                                    ${category}
+                                                                    <option value="${category}">${category}</option>
                                                                 </select>
                                                                 <div class="input-group-append">
                                                                     <button
