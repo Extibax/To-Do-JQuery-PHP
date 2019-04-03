@@ -77,7 +77,7 @@ $(document).ready(() => {
         }
     });
 
-    $('#todos').on('click', '#btn-edit-todo', function () {
+    $('#todos').on('click', '#btn-show-edit-todo', function () {
         let element = $(this)[0].parentElement.parentElement.parentElement;
         let ID = $(element).attr('todo-id');
 
@@ -100,7 +100,7 @@ $(document).ready(() => {
         });
     });
 
-    $('#todos').on('click', '#btn_save_changes_todo', function () {
+    $('#todos').on('click', '#btn_edit_todo', function () {
         let buttonRoot = $(this)[0];
 
         let element_id = $(buttonRoot).parents('#todo-container');
@@ -145,6 +145,10 @@ function saveTodo() {
     });
 }
 
+function editTodo(ID) {
+    $.post('')
+}
+
 function fetchTodos() {
     $.get('./php/fetch_todos.php', 'aplication/json', (response) => {
         let todos = JSON.parse(response);
@@ -154,6 +158,8 @@ function fetchTodos() {
 
             let due_Date = dateFormat(new Date(todo.Due_date), "hh:MM TT,yyyy-mm-dd");
             let due_Date_Array = due_Date.split(",");
+            let category = todo.Category_name;
+            console.log(category);
 
             template +=
                 `
@@ -175,7 +181,7 @@ function fetchTodos() {
                                                 </div>
                                             </span>
                                             <span>
-                                                <button class="btn btn-primary" id="btn-edit-todo" type="button"
+                                                <button class="btn btn-primary" id="btn-show-edit-todo" type="button"
                                                     data-toggle="collapse" data-target="#edit-menu-${todo.ID}"
                                                     aria-expanded="false" aria-controls="edit-menu-${todo.ID}">
                                                     <i class="far fa-edit"></i>
@@ -194,31 +200,30 @@ function fetchTodos() {
                                             <div class="row mt-4">
                                                 <div class="col-md-12">
                                                     <div class="row d-flex justify-content-between m-auto">
-                                                        <div class="col-md-5 pb-3">
-                                                            <div class="input-group bg-dark">
+                                                        <div class="col-md-6 pb-3">
+                                                            <div class="input-group bg-dark-lux">
                                                                 <input class="form-control bg-white" type="text"
                                                                     id="input_edit_date_${todo.ID}" placeholder="Edit your Due Date here"
                                                                     autocomplete="off">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-5 pb-3">
+                                                        <div class="col-md-6 pb-3">
                                                             <div class="input-group d-flex">
-                                                                <select class="form-control bg-white"
-                                                                    name="todo_category" id="input_edit_category">
-                                                                    <option value="One">One</option>
-                                                                    <option value="Two">Two</option>
-                                                                    <option value="Three">Three</option>
+                                                                <select class="form-control bg-white" name="todo_category" id="input_edit_category">
+                                                                    ${category}
                                                                 </select>
                                                                 <div class="input-group-append">
                                                                     <button
-                                                                        class="input-group-text d-flex bg-dark text-muted">
+                                                                        class="input-group-text d-flex bg-dark-lux text-muted">
                                                                         <i class="far fa-folder"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-2 ">
-                                                            <button class="btn btn-dark" id="btn_save_changes_todo"><i class="far fa-save"></i></button>
+                                                        <div class="col-md-12">
+                                                            <button class="btn btn-block btn-light form-control" id="btn_save_changes_todo">
+                                                                <i class="far fa-save"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>

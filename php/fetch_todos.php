@@ -2,7 +2,12 @@
 
 require_once 'connection.php';
 
-$query = "SELECT * FROM todos ORDER BY ID DESC";
+$query = 
+"SELECT todo.*, category.Name AS 'Category_name'
+FROM users user
+INNER JOIN categories category ON user.ID = category.User_id
+INNER JOIN todos todo ON user.ID = todo.User_id
+ORDER BY todo.ID DESC";
 $result = mysqli_query($connection, $query);
 
 if (!$result) {
