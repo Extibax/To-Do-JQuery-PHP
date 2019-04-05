@@ -1,5 +1,7 @@
 <?php
 
+echo "Hola";
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 $main_path = dirname(__DIR__);
 
