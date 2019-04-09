@@ -1,6 +1,6 @@
 <?php
 
-echo "Hola";
+session_start();
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 $main_path = dirname(__DIR__);
@@ -21,9 +21,5 @@ $connection = mysqli_connect(
 );
 
 mysqli_set_charset($connection, "utf8");
-
-if ($connection) {
-    session_start();
-}
 
 ?>

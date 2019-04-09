@@ -150,7 +150,7 @@ function editTodo(ID) {
 }
 
 function fetchTodos() {
-    $.get('./php/fetch_todos.php', 'aplic-ation/json', (response) => {
+    $.get('./php/fetch_todos.php', 'aplication/json', (response) => {
         let todos = JSON.parse(response);
         console.log(todos);
         let template = '';
