@@ -3,7 +3,7 @@ This is a To-Do manager
 
 ## Description
 
-Este To Do Manager, Es util para organizar tus tareas en un solo lugar, Ademas te recordara la tarea en la fecha que tu elijas, (El sistema de notificaciones esta en desarrollo)
+Este To Do Manager, Es util para organizar tus tareas en un solo lugar.
 
 ### Lenguages, technologies & Libraries Used
 
