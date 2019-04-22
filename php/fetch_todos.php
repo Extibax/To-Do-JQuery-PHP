@@ -16,14 +16,15 @@ if (isset($_SESSION['User']['ID'])) {
         die('Query show todos failed: ' . mysqli_error($connection));
     }
 
-    $todos = array();
+    if (mysqli_num_rows($result) > 0) {
+        $todos = array();
 
-    while ($todo = mysqli_fetch_assoc($result)) 
-    {
-        $todos[] = $todo;
+        while ($todo = mysqli_fetch_assoc($result)) {
+            $todos[] = $todo;
+        }
+
+        $todos_json = json_encode($todos);
+
+        echo $todos_json;
     }
-
-    $todos_json = json_encode($todos);
-
-    echo $todos_json;
 }
