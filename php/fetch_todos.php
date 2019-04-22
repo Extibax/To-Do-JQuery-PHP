@@ -8,18 +8,30 @@ if (isset($_SESSION['User']['ID'])) {
 
     $ID = $_SESSION['User']['ID'];
 
-    $query = "SELECT * FROM todos WHERE User_id = $ID ORDER BY ID DESC";
+    $rows = $dbh->prepare("SELECT COUNT(*) FROM todos WHERE User_id = ?");
 
-    $result = mysqli_query($connection, $query);
+    $rows->bindValue(1, $ID);
 
-    if (!$result) {
-        die('Query show todos failed: ' . mysqli_error($connection));
-    }
+    $rows->execute();
 
-    if (mysqli_num_rows($result) > 0) {
+    if ($rows->fetchColumn() > 0) {
+
+        $query = "
+            SELECT t.*, c.Name AS 'Category_name' 
+            FROM todos t 
+            INNER JOIN categories c ON t.Category_id = c.ID 
+            WHERE t.User_id = ? ORDER BY t.ID DESC
+        ";
+
+        $result = $dbh->prepare($query);
+
+        $result->bindValue(1, $ID);
+
+        echo $result->execute() ? "" : "Error: " . $result->infoError();
+
         $todos = array();
 
-        while ($todo = mysqli_fetch_assoc($result)) {
+        while ($todo = $result->fetch(PDO::FETCH_ASSOC)) {
             $todos[] = $todo;
         }
 

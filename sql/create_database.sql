@@ -13,8 +13,10 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS categories(
     ID              INT(11) AUTO_INCREMENT NOT NULL,
+    User_id         INT(11) NOT NULL,
     Name            VARCHAR(50) NOT NULL,
-    CONSTRAINT pk_categories PRIMARY KEY(ID)
+    CONSTRAINT pk_categories PRIMARY KEY(ID),
+    CONSTRAINT fk_categories_users FOREIGN KEY(User_id) REFERENCES users(ID)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS todos(

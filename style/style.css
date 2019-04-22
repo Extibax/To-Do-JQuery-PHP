@@ -1,25 +1,15 @@
-body {
-    /* background: url('../img/4k-wallpaper-calm-waters-dark-1252869.jpg') #F5F5F5; */
-    /* background-image: url('../img/starry_sky_night_mountains_117812_3840x2160.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; */
-
-    /* background-image: url('../img/starry_sky_night_mountains_117812_3840x2160.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed; */
-
-    background:  #111111/* url('../img/starry_sky_night_mountains_117812_3840x2160.jpg') */ no-repeat fixed center center;
-    background-size: cover;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-/* select {
-    -moz-appearance: none;
-    text-indent: 0.01px;
-    text-overflow: '';
-} */
+body {
+    background-image: url('../img/blue-blue-background-botanical-1445416.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
 header .nav-link:-moz-focus-inner,
 header .nav-link:focus,
@@ -55,6 +45,11 @@ header .nav-item:focus {
 
 .sidebar-logo {
     width: 50%;
+}
+
+.profile-info h3 {
+    margin-top: 30px;
+    color: #000;
 }
 
 .cursor-pointer {

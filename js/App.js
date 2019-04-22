@@ -1,6 +1,7 @@
 $(document).ready(() => {
 
     fetchTodos();
+    fetchCategories();
 
     alertify.set('notifier', 'position', 'top-center');
 
@@ -22,7 +23,7 @@ $(document).ready(() => {
         }
     });
 
-    $('#btn_save_todo').click(function(e) {
+    $('#btn_save_todo').click(function (e) {
         e.preventDefault();
         saveTodo();
         fetchTodos();
@@ -149,20 +150,45 @@ function editTodo(ID) {
     $.post('')
 }
 
+function fetchCategories() {
+    $.get('./php/fetch_categories.php', 'aplication/json', (response) => {
+        try {
+            let categories = JSON.parse(response);
+
+            let template = '';
+
+            categories.forEach(category => {
+                template += `<option value="${category.Category_name}">${category.Category_name}</option>`;
+            });
+
+            $('#input-select-category').html(template);
+
+        } catch (error) {
+            console.log(error + ' ' + response);
+        }
+    });
+}
+
 function fetchTodos() {
     $.get('./php/fetch_todos.php', 'aplication/json', (response) => {
-        let todos = JSON.parse(response);
-        console.log(todos);
-        let template = '';
 
-        todos.forEach(todo => {
+        try {
+            let todos = JSON.parse(response);
 
-            let due_Date = dateFormat(new Date(todo.Due_date), "hh:MM TT,yyyy-mm-dd");
-            let due_Date_Array = due_Date.split(",");
-            let category = todo.Category_name;
+            let template = '';
 
-            template +=
-                `
+            todos.forEach(todo => {
+
+                let due_Date = dateFormat(new Date(todo.Due_date), "hh:MM TT,yyyy-mm-dd");
+                let due_Date_Array = due_Date.split(",");
+                let category = todo.Category_name;
+
+                function hola() {
+                    return "hola";
+                }
+
+                template +=
+                    `
                 <div class="list-group-item bg-dark-lux mb-1" id="todo-container" todo-id="${todo.ID}">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="d-flex flex-column">
@@ -210,7 +236,8 @@ function fetchTodos() {
                                                         <div class="col-md-6 pb-3">
                                                             <div class="input-group d-flex">
                                                                 <select class="form-control bg-white" name="todo_category" id="input_edit_category">
-                                                                    <option value="${category}">${category}</option>
+                                                                     /* TODO: This is soy beatiful */
+                                                                    <option value="${category}">${hola()}</option>
                                                                 </select>
                                                                 <div class="input-group-append">
                                                                     <button
@@ -231,9 +258,12 @@ function fetchTodos() {
                                         </div>
                                     </div>
             `;
-        });
+            });
 
-        $('#todos').html(template);
+            $('#todos').html(template);
+        } catch (error) {
+            console.log(error + ' ' + response);
+        }
 
     })
 }

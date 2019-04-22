@@ -1,6 +1,9 @@
 <?php
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+    $_SESSION['User']['ID'] = 1;
+}
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 $main_path = dirname(__DIR__);
@@ -13,13 +16,13 @@ $USER = $_ENV['USER'];
 $PASS = $_ENV['PASS'];
 $DB = $_ENV['DB'];
 
-$connection = mysqli_connect(
-    $HOST,
-    $USER,
-    $PASS,
-    $DB
-);
-
-mysqli_set_charset($connection, "utf8");
+try {
+    $dbh = new PDO("mysql:host=$HOST;dbname=$DB;charset=utf8", $USER, $PASS, [
+        PDO::ATTR_EMULATE_PREPARES => false,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage() . "<br>";
+}
 
 ?>

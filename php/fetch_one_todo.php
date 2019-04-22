@@ -3,18 +3,31 @@
 if (isset($_POST['ID']) && is_numeric($_POST['ID'])) {
     require_once 'connection.php';
 
-    $ID = mysqli_real_escape_string($connection, $_POST['ID']);
+    $ID = $_POST['ID'];
 
-    $query = "SELECT * FROM todos WHERE ID = $ID";
-    $result = mysqli_query($connection, $query);
+    $rows = $dbh->prepare("SELECT COUNT(*) FROM todos WHERE ID = ?");
 
-    if (mysqli_num_rows($result) == 1) {
-        $todo = mysqli_fetch_assoc($result);
-        $jsonTodo = json_encode($todo);
-        echo $jsonTodo;
+    $rows->bindValue(1, $ID);
+
+    $rows->execute() ? "" : "Error: " . $rows->infoError();
+
+    if ($rows->fetchColumn() > 0) {
+        $result = $dbh->prepare("SELECT * FROM todos WHERE ID = ?");
+
+        $result->bindValue(1, $ID);
+
+        $result->execute() ? "" : "Error: " . $result->infoError();
+
+        $todo = $result->fetch(PDO::FETCH_ASSOC);
+
+        $todo_json = json_encode($todo);
+
+        echo $todo_json;
     } else {
         echo 0;
     }
+
+    
 } else {
     echo 0;
 }
