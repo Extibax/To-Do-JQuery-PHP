@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     fetchTodos();
-    fetchCategories();
+    listCategories();
 
     alertify.set('notifier', 'position', 'top-center');
 
@@ -150,7 +150,7 @@ function editTodo(ID) {
     $.post('')
 }
 
-function fetchCategories() {
+function listCategories() {
     $.get('./php/fetch_categories.php', 'aplication/json', (response) => {
         try {
             let categories = JSON.parse(response);
@@ -183,8 +183,15 @@ function fetchTodos() {
                 let due_Date_Array = due_Date.split(",");
                 let category = todo.Category_name;
 
-                function hola() {
-                    return "hola";
+                function fetchCategories() {
+                    $.get('./php/fetch_categories.php', 'aplication/json', (res) => {
+                        try {
+                            let categories = JSON.parse(res);
+                            console.log(categories);
+                        } catch (error) {
+                            console.log('Error: ' + error + ' Response: ' + res)
+                        }
+                    });
                 }
 
                 template +=
@@ -237,7 +244,7 @@ function fetchTodos() {
                                                             <div class="input-group d-flex">
                                                                 <select class="form-control bg-white" name="todo_category" id="input_edit_category">
                                                                      /* TODO: This is soy beatiful */
-                                                                    <option value="${category}">${hola()}</option>
+                                                                    <option value="${category}">${fetchCategories()}</option>
                                                                 </select>
                                                                 <div class="input-group-append">
                                                                     <button
