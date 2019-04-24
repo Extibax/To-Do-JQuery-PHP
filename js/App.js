@@ -68,7 +68,7 @@ $(document).ready(() => {
 
             $.post('./php/check_todo.php', {
                 ID: ID
-            }, function (response) {
+            }, function () {
                 fetchTodos();
             });
         }

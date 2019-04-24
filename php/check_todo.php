@@ -2,7 +2,7 @@
 
 require_once 'connection.php';
 
-if (isset($_POST['ID'])) {
+if (isset($_SESSION['User']) && isset($_POST['ID'])) {
     $ID = $_POST['ID'];
 
     if (!empty($ID) && is_numeric($ID)) {
