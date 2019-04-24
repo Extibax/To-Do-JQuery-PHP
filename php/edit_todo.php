@@ -1,35 +1,36 @@
 <?php
 
-if (isset($_POST['ID']) && isset($_POST['Todo'])) {
-    require_once 'connection.php';
+require_once 'connection.php';
 
-    $id = mysqli_real_escape_string($connection, $_POST['ID']);
-    $todo = mysqli_real_escape_string($connection, $_POST['Todo']);
+if (isset($_SESSION['User']) && isset($_POST['id']) && isset($_POST['todo']) && isset($_POST['category_ID'])) {
 
-    $edit_errors = array();
+    $id = $_POST['id'];
+    $todo = $_POST['todo'];
+    $date = $_POST['date'];
+    $category_ID = $_POST['category_ID'];
 
-    if (empty($id) || !is_numeric($id)) {
-        $edit_errors['ID'] = "Esta vacio o contiene caracteres no numericos";
-    }
+    if ($id) {
+        $query = "UPDATE todos SET Category_id = :category_ID, Todo = :todo, Due_date = :due_Date WHERE ID = :id";
 
-    if (empty($todo) || is_numeric($todo)) {
-        $edit_errors['Todo'] = "Esta vacio o no contiene letras";
-    }
+        $result = $dbh->prepare($query);
 
-    if (count($edit_errors) == 0) {
-        $query = "UPDATE todos SET Todo = '$todo' WHERE ID = $id";
-        $result = mysqli_query($connection, $query);
+        $result->bindValue(':category_ID', $category_ID);
 
-        if ($result) {
+        $result->bindValue(':todo', $todo);
+
+        $result->bindValue(':due_Date', $date ? $date : null, PDO::PARAM_STR);
+
+        $result->bindValue(':id', $id);
+
+        echo $result->execute() ? "" : "Error: " . $result->infoError();
+
+        if ($result->rowCount() > 0) {
             echo 1;
         } else {
             echo 0;
         }
-    } else {
-        $edit_errors_json = json_encode($edit_errors);
-        echo $edit_errors_json;
     }
 
 } else {
-    echo 0;
+    echo "Outside: 0";
 }

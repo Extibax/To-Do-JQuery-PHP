@@ -12,7 +12,7 @@ if (isset($_POST['ID']) && is_numeric($_POST['ID'])) {
     $rows->execute() ? "" : "Error: " . $rows->infoError();
 
     if ($rows->fetchColumn() > 0) {
-        $result = $dbh->prepare("SELECT * FROM todos WHERE ID = ?");
+        $result = $dbh->prepare("SELECT Due_date FROM todos WHERE ID = ?");
 
         $result->bindValue(1, $ID);
 

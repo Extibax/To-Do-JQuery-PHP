@@ -69,6 +69,16 @@ header .nav-item:focus {
     background: rgba(55, 59, 67, .5);
 }
 
+.todos {
+    height: 67vh;
+    overflow: auto !important;
+}
+
+.todo_content {
+    margin-bottom: 3px;
+    max-width: 550px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
@@ -140,6 +150,10 @@ input[type="color"]:focus,
 @media only screen and (max-width: 420px) {
     body {
         background-size: initial;
+    }
+
+    .todos {
+        font-size: 14px;
     }
 
     .header-logo {

@@ -3,13 +3,16 @@
 require_once 'connection.php';
 
 if (isset($_POST['ID'])) {
-    $ID = mysqli_real_escape_string($connection, $_POST['ID']);
+    $ID = $_POST['ID'];
 
     if (!empty($ID) && is_numeric($ID)) {
-        $query = "DELETE FROM todos WHERE ID = $ID";
-        $result = mysqli_query($connection, $query);
+        $result = $dbh->prepare("DELETE FROM todos WHERE ID = ?");
 
-        if ($result) {
+        $result->bindValue(1, $ID);
+
+        echo $result->execute() ? "" : "Error: " . $result->infoError();
+
+        if ($result->rowCount() > 0) {
             echo 1;
         } else {
             echo 0;

@@ -3,8 +3,6 @@ $(document).ready(() => {
     fetchTodos();
     listCategories();
 
-    alertify.set('notifier', 'position', 'top-center');
-
     $('#datepicker').datetimepicker({
         uiLibrary: 'bootstrap4',
         modal: true,
@@ -57,8 +55,7 @@ $(document).ready(() => {
                     fetchTodos();
                     console.log('Edit todo: ' + response);
                 } else {
-                    alertify.error('Something is wrong :(');
-                    /* TODO: Crear una funcion para mostrar los errores al cliente */
+                    //TODO: Show message here
                 }
             });
         }
@@ -72,7 +69,6 @@ $(document).ready(() => {
             $.post('./php/check_todo.php', {
                 ID: ID
             }, function (response) {
-                console.log(response);
                 fetchTodos();
             });
         }
@@ -87,8 +83,12 @@ $(document).ready(() => {
         }, function (response) {
 
             let todo = JSON.parse(response);
-            let date = new Date(todo.Due_date);
-            let dateFormated = dateFormat(date, 'h:MM TT yyyy-mm-dd');
+            let date = null;
+            let dateFormated = {};
+            if (todo.Due_date) {
+                date = new Date(todo.Due_date);
+                dateFormated = dateFormat(date, 'h:MM TT yyyy-mm-dd');
+            }
 
             $('#input_edit_date_' + ID).datetimepicker({
                 uiLibrary: 'bootstrap4',
@@ -96,12 +96,12 @@ $(document).ready(() => {
                 footer: true,
                 showRightIcon: false,
                 format: 'h:MM TT yyyy-mm-dd',
-                value: dateFormated
+                value: date ? dateFormated : null
             });
         });
     });
 
-    $('#todos').on('click', '#btn_edit_todo', function () {
+    $('#todos').on('click', '#btn_save_changes_todo', function () {
         let buttonRoot = $(this)[0];
 
         let element_id = $(buttonRoot).parents('#todo-container');
@@ -109,16 +109,34 @@ $(document).ready(() => {
 
         let edit_menu_elements = $(buttonRoot).parents('#edit-menu-' + ID)
 
-        let input_todo = $(edit_menu_elements).find('input#input_edit_todo').val();
-        console.log(input_todo);
+        let todo = $(edit_menu_elements).find('input#input_edit_todo').val();
 
-        let input_date = $(edit_menu_elements).find('input#input_edit_date_' + ID).val();
-        console.log(input_date);
+        let due_Date = $(edit_menu_elements).find('input#input_edit_date_' + ID).val();
 
-        let input_category = $(edit_menu_elements).find('#input_edit_category').find(':selected').val();
-        console.log(input_category);
+        let date = null;
+        let dateFormated = {};
 
-        //TODO: Crear un post para los datos editados.
+        if (due_Date) {
+            date = new Date(due_Date);
+            dateFormated = dateFormat(date, 'yyyy-mm-dd HH:MM:ss');
+        }
+
+        let category_ID = $(edit_menu_elements).find('#input_edit_category').find(':selected').val();
+
+        let updatedValues = {
+            id: ID,
+            todo: todo,
+            date: date ? dateFormated : null,
+            category_ID: category_ID
+        }
+
+        $.post('./php/edit_todo.php', updatedValues, (res) => {
+            if (res == 1) {
+                fetchTodos();
+            } else {
+
+            }
+        });
 
     });
 
@@ -135,14 +153,24 @@ function clearFormTodo() {
 }
 
 function saveTodo() {
-    const postSaveTodo = {
-        Todo: $('#input-todo').val()
+
+    let todo = $('#input-todo').val();
+
+    let due_Date = $('#datepicker').val();
+    let due_Date_Formated = dateFormat(due_Date, 'yyyy-mm-dd HH:MM:ss');
+
+    let category_ID = $('#input-select-category').val();
+
+    const newTodo = {
+        todo: todo,
+        due_Date: due_Date ? due_Date_Formated : null,
+        category_ID: category_ID
     };
 
-    $.post('./php/save_todo.php', postSaveTodo, (response) => {
-        $('#form-save-todo').trigger('reset');
+    $.post('./php/save_todo.php', newTodo, (res) => {
         fetchTodos();
-        console.log('Save todo: ' + response);
+        $('#form-save-todo').trigger('reset');
+        console.log(res);
     });
 }
 
@@ -150,15 +178,13 @@ function editTodo(ID) {
     $.post('')
 }
 
-let categories = {};
-
 function fetchUserCategories(allUserCategories, todoCategory) {
     let template = '';
     allUserCategories.forEach(allUserCategories => {
         if (allUserCategories.Name == todoCategory) {
-            template += `<option value="${allUserCategories.Name}" selected>${allUserCategories.Name}</option>`;
+            template += `<option value="${allUserCategories.ID}" selected>${allUserCategories.Name}</option>`;
         } else {
-            template += `<option value="${allUserCategories.Name}">${allUserCategories.Name}</option>`;
+            template += `<option value="${allUserCategories.ID}">${allUserCategories.Name}</option>`;
         }
     });
     return template;
@@ -172,7 +198,7 @@ function listCategories() {
             let template = '';
 
             categories.forEach(category => {
-                template += `<option value="${category.Category_name}">${category.Category_name}</option>`;
+                template += `<option value="${category.ID}">${category.Name}</option>`;
             });
 
             $('#input-select-category').html(template);
@@ -191,17 +217,23 @@ function fetchTodos() {
             let todos_categories = JSON.parse(response);
 
             let todos = JSON.parse(todos_categories[0]);
-            let categories = JSON.parse(todos_categories[1]);
 
-            console.log(todos);
-            console.log(categories);
+            let categories = JSON.parse(todos_categories[1]);
 
             let template = '';
 
             todos.forEach(todo => {
 
-                let due_Date = dateFormat(new Date(todo.Due_date), "hh:MM TT,yyyy-mm-dd");
-                let due_Date_Array = due_Date.split(",");
+                if (todo.Due_date == "0000-00-00 00:00:00") {
+                    return;
+                }
+
+                let due_Date_Array = [];
+
+                if (todo.Due_date) {
+                    let due_Date = dateFormat(new Date(todo.Due_date), "yyyy-mm-dd,hh:MM TT");
+                    due_Date_Array = due_Date.split(",");
+                }
 
                 template +=
                     `
@@ -209,16 +241,16 @@ function fetchTodos() {
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="d-flex flex-column">
                                                 <div class="row">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12 todo_content">
                                                         <span>${todo.Todo}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex">
                                                         <span class="badge badge-primary badge-pill align-self-start"><i
-                                                                class="far fa-calendar"></i> ${due_Date_Array[0]}</span>
+                                                                class="far fa-calendar"></i> ${due_Date_Array[0] ? due_Date_Array[0] : "Without date"}</span>
                                                         <span class="badge badge-primary badge-pill align-self-start ml-1"><i
-                                                                class="far fa-clock"></i> ${due_Date_Array[1]}</span>
+                                                                class="far fa-clock"></i> ${due_Date_Array[1] ? due_Date_Array[1] : "Without hour"}</span>
                                                     </div>
                                                 </div>
                                             </span>
@@ -275,7 +307,6 @@ function fetchTodos() {
             `;
             });
 
-            /* console.log(template); */
             $('#todos').html(template);
         } catch (error) {
             console.log(error + ' ' + response);

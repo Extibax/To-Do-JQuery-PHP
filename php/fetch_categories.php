@@ -6,7 +6,7 @@ if (isset($_SESSION['User'])) {
     $ID = $_SESSION['User']['ID'];
 
     $query = "
-        SELECT Name AS 'Category_name' 
+        SELECT *  
         FROM categories 
         WHERE User_id = ?
     ";
