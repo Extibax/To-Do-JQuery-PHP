@@ -23,15 +23,15 @@ if (isset($_SESSION['User']['ID'])) {
             WHERE t.User_id = ? ORDER BY t.ID DESC
         ";
 
-        $result = $dbh->prepare($query);
+        $result_todos = $dbh->prepare($query);
 
-        $result->bindValue(1, $ID);
+        $result_todos->bindValue(1, $ID);
 
-        echo $result->execute() ? "" : "Error: " . $result->infoError();
+        echo $result_todos->execute() ? "" : "Error: " . $result_todos->infoError();
 
         $todos = array();
 
-        while ($todo = $result->fetch(PDO::FETCH_ASSOC)) {
+        while ($todo = $result_todos->fetch(PDO::FETCH_ASSOC)) {
             $todos[] = $todo;
         }
 

@@ -150,6 +150,21 @@ function editTodo(ID) {
     $.post('')
 }
 
+let categories = {};
+
+function fetchUserCategories() {
+    $.get('./php/fetch_categories.php', 'aplication/json', function(res) {
+        /* try {
+            return JSON.parse(res);
+        } catch (error) {
+            console.log('Error: ' + error + ' Response: ' + res)
+            return JSON.parse(res)
+        } */
+
+        return JSON.parse(res);
+    });
+}
+
 function listCategories() {
     $.get('./php/fetch_categories.php', 'aplication/json', (response) => {
         try {
@@ -177,22 +192,16 @@ function fetchTodos() {
 
             let template = '';
 
+            let userCategories = fetchUserCategories();
+
+            console.log(userCategories);
+            console.log(fetchUserCategories());
+
             todos.forEach(todo => {
 
                 let due_Date = dateFormat(new Date(todo.Due_date), "hh:MM TT,yyyy-mm-dd");
                 let due_Date_Array = due_Date.split(",");
                 let category = todo.Category_name;
-
-                function fetchCategories() {
-                    $.get('./php/fetch_categories.php', 'aplication/json', (res) => {
-                        try {
-                            let categories = JSON.parse(res);
-                            console.log(categories);
-                        } catch (error) {
-                            console.log('Error: ' + error + ' Response: ' + res)
-                        }
-                    });
-                }
 
                 template +=
                     `
@@ -244,7 +253,7 @@ function fetchTodos() {
                                                             <div class="input-group d-flex">
                                                                 <select class="form-control bg-white" name="todo_category" id="input_edit_category">
                                                                      /* TODO: This is soy beatiful */
-                                                                    <option value="${category}">${fetchCategories()}</option>
+                                                                    <option value="${category}">${category}</option>
                                                                 </select>
                                                                 <div class="input-group-append">
                                                                     <button
