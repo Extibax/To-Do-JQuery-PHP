@@ -37,6 +37,25 @@ if (isset($_SESSION['User']['ID'])) {
 
         $todos_json = json_encode($todos);
 
-        echo $todos_json;
+        $result_categories = $dbh->prepare("SELECT * FROM categories WHERE User_id = ?");
+        
+        $result_categories->bindValue(1, $ID);
+
+        echo $result_categories->execute() ? "" : "Error: " . $result_categories->infoError();
+
+        $categories = array();
+
+        while ($category = $result_categories->fetch(PDO::FETCH_ASSOC)) {
+            $categories[] = $category;
+        }
+
+        $categories_json = json_encode($categories);
+        
+        $todos_categories = array(
+            $todos_json,
+            $categories_json
+        );
+        
+        echo json_encode($todos_categories);
     }
 }

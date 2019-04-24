@@ -152,17 +152,16 @@ function editTodo(ID) {
 
 let categories = {};
 
-function fetchUserCategories() {
-    $.get('./php/fetch_categories.php', 'aplication/json', function(res) {
-        /* try {
-            return JSON.parse(res);
-        } catch (error) {
-            console.log('Error: ' + error + ' Response: ' + res)
-            return JSON.parse(res)
-        } */
-
-        return JSON.parse(res);
+function fetchUserCategories(allUserCategories, todoCategory) {
+    let template = '';
+    allUserCategories.forEach(allUserCategories => {
+        if (allUserCategories.Name == todoCategory) {
+            template += `<option value="${allUserCategories.Name}" selected>${allUserCategories.Name}</option>`;
+        } else {
+            template += `<option value="${allUserCategories.Name}">${allUserCategories.Name}</option>`;
+        }
     });
+    return template;
 }
 
 function listCategories() {
@@ -188,20 +187,21 @@ function fetchTodos() {
     $.get('./php/fetch_todos.php', 'aplication/json', (response) => {
 
         try {
-            let todos = JSON.parse(response);
+
+            let todos_categories = JSON.parse(response);
+
+            let todos = JSON.parse(todos_categories[0]);
+            let categories = JSON.parse(todos_categories[1]);
+
+            console.log(todos);
+            console.log(categories);
 
             let template = '';
-
-            let userCategories = fetchUserCategories();
-
-            console.log(userCategories);
-            console.log(fetchUserCategories());
 
             todos.forEach(todo => {
 
                 let due_Date = dateFormat(new Date(todo.Due_date), "hh:MM TT,yyyy-mm-dd");
                 let due_Date_Array = due_Date.split(",");
-                let category = todo.Category_name;
 
                 template +=
                     `
@@ -252,8 +252,7 @@ function fetchTodos() {
                                                         <div class="col-md-6 pb-3">
                                                             <div class="input-group d-flex">
                                                                 <select class="form-control bg-white" name="todo_category" id="input_edit_category">
-                                                                     /* TODO: This is soy beatiful */
-                                                                    <option value="${category}">${category}</option>
+                                                                     ${fetchUserCategories(categories, todo.Category_name)}
                                                                 </select>
                                                                 <div class="input-group-append">
                                                                     <button
@@ -276,6 +275,7 @@ function fetchTodos() {
             `;
             });
 
+            /* console.log(template); */
             $('#todos').html(template);
         } catch (error) {
             console.log(error + ' ' + response);
