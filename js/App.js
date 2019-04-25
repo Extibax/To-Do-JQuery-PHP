@@ -2,6 +2,7 @@ $(document).ready(() => {
 
     isLoggedIn();
     fetchTodos($('#select_categories').val());
+    showUsername();
     listCategories();
 
     $('#new_category').submit((e) => {
@@ -158,6 +159,17 @@ $(document).ready(() => {
     });
 
 });
+
+function showUsername() {
+    $.get('./php/get_username.php', function(res) {
+        console.log(res);
+        if (res == 0) {
+            console.log("Session not exists");
+        } else {
+            $('#show_username').text(res);
+        }
+    });
+}
 
 function newCategory() {
     let newCategory = {
