@@ -2,7 +2,6 @@
 
 if (!isset($_SESSION)) {
     session_start();
-    $_SESSION['User']['ID'] = 1;
 }
 
 require dirname(__DIR__) . '/vendor/autoload.php';

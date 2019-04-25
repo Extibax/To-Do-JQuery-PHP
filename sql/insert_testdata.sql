@@ -1,7 +1,7 @@
 USE to_do_extibaxinc;
 
 /* User to test DB */
-INSERT INTO users VALUES (1, 'extibax', 'extibax@gmail.com', 'sebas20', NULL);
+INSERT INTO users VALUES (1, 'extibax', 'sebas20', NULL);
 
 /* Category to test DB */
 INSERT INTO categories VALUES (1, 'inbox');

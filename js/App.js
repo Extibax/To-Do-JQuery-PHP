@@ -1,10 +1,23 @@
 $(document).ready(() => {
 
+    isLoggedIn();
     fetchTodos($('#select_categories').val());
     listCategories();
 
+    $('#new_category').submit((e) => {
+        $('#form_new_category').modal('hide');
+        e.preventDefault();
+        newCategory();
+        $('#select_categories').html('<option value="all">all</option>');
+        listCategories();
+    });
+
     $('#select_categories').change(() => {
         fetchTodos($('#select_categories option:selected').text());
+    });
+
+    $('#button-closesession').click(() => {
+        closeSession();
     });
 
     $('#datepicker').datetimepicker({
@@ -146,6 +159,45 @@ $(document).ready(() => {
 
 });
 
+function newCategory() {
+    let newCategory = {
+        category_name: $('#category_name').val()
+    }
+
+    $.post('./php/save_category.php', newCategory, (res) => {
+        if (res == 1) {
+            console.log(res);
+            swal('¡Category created successfully!', {
+                icon: 'success'
+            })
+        } else {
+            swal('¡Oh no!', 'Something is wrong when saving category', 'error');
+        }
+    });
+}
+
+function closeSession() {
+    $.get('./php/close_session.php', function (res) {
+        if (res == 1) {
+            swal('Good Bye', 'Session closed correctly', 'success').then(() => {
+                window.location = './views/login/signin.html';
+            });
+        } else if(res == 0) {
+            swal('¡Oh no!', 'Something is wrong when closing the session', 'error')
+        }
+    });
+}
+
+function isLoggedIn () {
+    $.get('./php/isLoggedIn.php', function(res) {
+        if (res == "01") {
+            return;
+        } else {
+            window.location = './views/login/signin.html';
+        }
+    });
+}
+
 function getCurrentDateTime() {
     return dateFormat(new Date(), "h:MM TT yyyy-mm-dd");
 }
@@ -263,13 +315,13 @@ function fetchTodos(whichCategory) {
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-12 d-flex">
+                                                    <div class="col-md-12 badge-container">
                                                         <span class="badge badge-primary badge-pill align-self-start"><i
                                                                 class="far fa-calendar"></i> ${due_Date_Array[0] ? due_Date_Array[0] : "Without date"}</span>
                                                         <span class="badge badge-primary badge-pill align-self-start ml-1"><i
                                                                 class="far fa-clock"></i> ${due_Date_Array[1] ? due_Date_Array[1] : "Without hour"}</span>
                                                         <span class="badge badge-success badge-pill align-self-start ml-1"><i
-                                                                class="far fa-clock"></i> ${todo.Category_name}</span>
+                                                                class="fas fa-layer-group"></i> ${todo.Category_name}</span>
                                                     </div>
                                                 </div>
                                             </span>

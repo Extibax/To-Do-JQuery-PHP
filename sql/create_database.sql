@@ -5,7 +5,6 @@ USE to_do_extibaxinc;
 CREATE TABLE IF NOT EXISTS users(
     ID              INT(11) AUTO_INCREMENT NOT NULL,
     Username        VARCHAR(50) NOT NULL,
-    Email           VARCHAR(255),
     Password        VARCHAR(255) NOT NULL,
     Date            TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_users PRIMARY KEY(ID)

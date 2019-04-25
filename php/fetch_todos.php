@@ -71,4 +71,6 @@ if (isset($_SESSION['User']['ID'])) {
     } else {
         echo "Currently not exists todos";
     }
+} else {
+    echo 00;
 }
