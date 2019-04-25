@@ -1,7 +1,11 @@
 $(document).ready(() => {
 
-    fetchTodos();
+    fetchTodos($('#select_categories').val());
     listCategories();
+
+    $('#select_categories').change(() => {
+        fetchTodos($('#select_categories option:selected').text());
+    });
 
     $('#datepicker').datetimepicker({
         uiLibrary: 'bootstrap4',
@@ -52,7 +56,7 @@ $(document).ready(() => {
 
             $.post('./php/edit_todo.php', postEditTodo, (response) => {
                 if (response == 1) {
-                    fetchTodos();
+                    fetchTodos($('#select_categories option:selected').text());
                     console.log('Edit todo: ' + response);
                 } else {
                     //TODO: Show message here
@@ -132,7 +136,7 @@ $(document).ready(() => {
 
         $.post('./php/edit_todo.php', updatedValues, (res) => {
             if (res == 1) {
-                fetchTodos();
+                fetchTodos($('#select_categories option:selected').text());
             } else {
 
             }
@@ -150,6 +154,7 @@ function clearFormTodo() {
     $('#input-todo').val('');
     $('#datepicker').val('');
     $('#input-select-category').val(1);
+    $('#form_new_todo_date').collapse('hide');
 }
 
 function saveTodo() {
@@ -168,14 +173,19 @@ function saveTodo() {
     };
 
     $.post('./php/save_todo.php', newTodo, (res) => {
-        fetchTodos();
+        fetchTodos($('#select_categories option:selected').text());
         $('#form-save-todo').trigger('reset');
-        console.log(res);
     });
 }
 
 function editTodo(ID) {
     $.post('')
+}
+
+function showSelectCategories() {
+    let previus_template = $('#select-categories').html();
+
+    $.get('')
 }
 
 function fetchUserCategories(allUserCategories, todoCategory) {
@@ -195,13 +205,17 @@ function listCategories() {
         try {
             let categories = JSON.parse(response);
 
-            let template = '';
+            let new_template = '';
 
             categories.forEach(category => {
-                template += `<option value="${category.ID}">${category.Name}</option>`;
+                new_template += `<option value="${category.ID}">${category.Name}</option>`;
             });
 
-            $('#input-select-category').html(template);
+            $('#input-select-category').html(new_template);
+
+            let previus_template = $('#select_categories').html();
+
+            $('#select_categories').html(previus_template + new_template);
 
         } catch (error) {
             console.log(error + ' ' + response);
@@ -209,11 +223,14 @@ function listCategories() {
     });
 }
 
-function fetchTodos() {
-    $.get('./php/fetch_todos.php', 'aplication/json', (response) => {
+function fetchTodos(whichCategory) {
+
+    whichCategory = whichCategory ? whichCategory : 'all';
+
+    $.get('./php/fetch_todos.php?category=' + whichCategory, 'aplication/json', (response) => {
 
         try {
-
+            
             let todos_categories = JSON.parse(response);
 
             let todos = JSON.parse(todos_categories[0]);
@@ -251,6 +268,8 @@ function fetchTodos() {
                                                                 class="far fa-calendar"></i> ${due_Date_Array[0] ? due_Date_Array[0] : "Without date"}</span>
                                                         <span class="badge badge-primary badge-pill align-self-start ml-1"><i
                                                                 class="far fa-clock"></i> ${due_Date_Array[1] ? due_Date_Array[1] : "Without hour"}</span>
+                                                        <span class="badge badge-success badge-pill align-self-start ml-1"><i
+                                                                class="far fa-clock"></i> ${todo.Category_name}</span>
                                                     </div>
                                                 </div>
                                             </span>
