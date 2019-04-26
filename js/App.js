@@ -242,16 +242,6 @@ function saveTodo() {
     });
 }
 
-function editTodo(ID) {
-    $.post('')
-}
-
-function showSelectCategories() {
-    let previus_template = $('#select-categories').html();
-
-    $.get('')
-}
-
 function fetchUserCategories(allUserCategories, todoCategory) {
     let template = '';
     allUserCategories.forEach(allUserCategories => {
