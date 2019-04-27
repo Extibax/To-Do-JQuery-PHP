@@ -5,7 +5,7 @@ This is a To-Do manager
 
 Este To Do Manager, Es util para organizar tus tareas en un solo lugar.
 
-### Lenguages, technologies & Libraries Used
+### Languages, technologies & Libraries Used
 
 * HTML5
 * CSS3
